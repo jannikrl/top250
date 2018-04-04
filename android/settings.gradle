@@ -1,0 +1,3 @@
+rootProject.name = 'top250'
+
+include ':app'
