@@ -33,7 +33,12 @@ class ImdbService {
 
     return _.map(movies, (movie) => {
       return {
-        title: _.get(movie, 'data.title'),
+        id: _.get(movie, 'idIMDB'),
+        title: _.get(movie, 'title'),
+        year: _.get(movie, 'year'),
+        thumbnail: _.get(movie, 'urlPoster'),
+        rating: _.get(movie, 'rating'),
+        ranking: _.get(movie, 'ranking'),
       }
     });
   }

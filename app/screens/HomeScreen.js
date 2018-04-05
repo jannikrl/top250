@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import * as moviesActions from '../store/movies/actions';
 import * as moviesSelectors from '../store/movies/reducer';
+import MovieList from '../components/MovieList';
 
 class HomeScreen extends Component {
 	static navigationOptions = {
@@ -17,28 +18,23 @@ class HomeScreen extends Component {
 		this.props.dispatch(moviesActions.fetchMovies());
 	}
 
-	render() {
-		let length = (this.props.moviesById) ? JSON.stringify(this.props.moviesById.length) : 'Loading...';
+	_hasSeenToggle = (movieId) => {
+		this.props.dispatch(moviesActions.movieHasSeenToggle(movieId));
+	}
 
+	render() {
 		return (
-			<View>
-				<Text>
-					Home Screen {length}
-        		</Text>
-				<Button
-					title="Go to movie"
-					onPress={() => {this.props.navigation.navigate('Movie', {
-						movieId: 89,
-						title: 'Matrix',
-					})}} />
-			</View>
+			<MovieList 
+				data={this.props.moviesTopList}
+				hasSeenToggle={this._hasSeenToggle}
+			/>
 		);
 	}
 }
 
 function mapStateToProps(state) {
 	return {
-		moviesById: moviesSelectors.getMoviesById(state)
+		moviesTopList: moviesSelectors.getMoviesTopList(state)
 	}
 }
 
