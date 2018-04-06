@@ -1,2 +1,3 @@
 export const MOVIES_FETCHED = 'movies.MOVIES_FETCHED';
 export const MOVIE_SELECTION_TOGGLE = 'movies.MOVIE_SELECTION_TOGGLE';
+export const MOVIE_SET_SELECTED = 'movies.MOVIE_SET_SELECTED';

@@ -4,7 +4,7 @@ import MovieListItem from './MovieListItem';
 
 export default class MovieList extends Component {
     _onPressItem = (movieId) => {
-        this.props.hasSeenToggle(movieId);
+        this.props.onPressItem(movieId);
     }
     
     _renderItem = ({item}) => (

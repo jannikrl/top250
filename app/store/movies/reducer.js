@@ -5,6 +5,7 @@ import update from 'immutability-helper';
 
 const initialState = Immutable({
   moviesById: undefined,
+  selectedMoviesById: {},
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -14,17 +15,14 @@ export default function reduce(state = initialState, action = {}) {
         ...state, 
         moviesById: action.moviesById
       };
-    case types.MOVIE_SELECTION_TOGGLE:
+    case types.MOVIE_SET_SELECTED:
       return {
-        ...state, 
-        moviesById: {
-          ...state.moviesById,
-          [action.movieId]: {
-            ...state.moviesById[action.movieId],
-            isSelected: action.newValue
-          }
+        ...state,
+        selectedMoviesById: {
+          ...state.selectedMoviesById,
+          [action.movieId]: action.selected, 
         }
-      };
+      }
     default:
       return state;
   }
@@ -32,11 +30,27 @@ export default function reduce(state = initialState, action = {}) {
 
 // selectors
 
+export function getMovie(state, movieId) {
+  return state.movies.moviesById[movieId];
+}
+
 export function getMoviesById(state) {
   return state.movies.moviesById;
 }
 
-export function getMoviesTopList(state) {
+export function getMovieListOrderedByRank(state) {
   const movieList = _.values(state.movies.moviesById);
   return _.orderBy(movieList, ['rank']);
+}
+
+export function getMoviesCount(state) {
+  return _.keys(state.movies.moviesById).length
+}
+
+export function getSelectedMoviesById(state) {
+  return state.movies.selectedMoviesById;
+}
+
+export function getSelectedMoviesCount(state) {
+  return _.values(getSelectedMoviesById(state)).length;
 }

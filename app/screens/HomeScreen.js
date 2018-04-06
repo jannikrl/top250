@@ -1,40 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-	Text,
-	View,
-	Button,
-} from 'react-native';
 import * as moviesActions from '../store/movies/actions';
 import * as moviesSelectors from '../store/movies/reducer';
 import MovieList from '../components/MovieList';
+import SwipeableList from '../components/SwipeableList';
 
 class HomeScreen extends Component {
 	static navigationOptions = {
-		title: 'Hjem'
+		title: 'Home'
 	}
 	
 	componentDidMount() {
 		this.props.dispatch(moviesActions.fetchMovies());
 	}
 
-	_hasSeenToggle = (movieId) => {
-		this.props.dispatch(moviesActions.movieHasSeenToggle(movieId));
+	_isSelectedToggle = (movieId) => {
+		this.props.dispatch(moviesActions.movieIsSelectedToggle(movieId));
+	}
+
+	_goToMovie = (movieId) => {
+		this.props.navigation.navigate('Movie', {movieId: movieId});
+	}
+
+	_setSelected = (movieId, selected) => {
+		this.props.dispatch(moviesActions.setSelected(movieId, selected));
 	}
 
 	render() {
 		return (
-			<MovieList 
-				data={this.props.moviesTopList}
-				hasSeenToggle={this._hasSeenToggle}
+			<SwipeableList
+				data={this.props.movieListOrderedByRank}
+				selectedItems={this.props.selectedMoviesById}
+				setSelected={this._setSelected}
 			/>
+			
 		);
 	}
 }
 
 function mapStateToProps(state) {
 	return {
-		moviesTopList: moviesSelectors.getMoviesTopList(state)
+		// @TODO: refactor name to movieListOrderedByRank
+
+		movieListOrderedByRank: moviesSelectors.getMovieListOrderedByRank(state), 
+		selectedMoviesById: moviesSelectors.getSelectedMoviesById(state),
 	}
 }
 

@@ -6,8 +6,18 @@ import ImdbService from '../../services/imdb';
 export function fetchMovies() {
 	return async (dispatch, getState) => {
 		try {
-			const movies = await ImdbService.getMovies();
-			const moviesById = _.keyBy(movies, movie => movie.id);			
+			const moviesCount = moviesSelectors.getMoviesCount(getState());
+				
+			// Load movies from file system for quick response
+			if (!moviesCount) {
+				const movies = await ImdbService.getMoviesFromFileSystem();			
+				const moviesById = _.keyBy(movies, movie => movie.id);
+				dispatch({ type: types.MOVIES_FETCHED, moviesById });
+			}
+
+			// Update list using API
+			const movies = await ImdbService.getMoviesFromApi();			
+			const moviesById = _.keyBy(movies, movie => movie.id);
 			dispatch({ type: types.MOVIES_FETCHED, moviesById });
 		} catch (error) {
 			console.error(error);
@@ -15,11 +25,6 @@ export function fetchMovies() {
 	};
 }
 
-export function movieHasSeenToggle(movieId) {
-	return (dispatch, getState) => {
-		const moviesById = moviesSelectors.getMoviesById(getState());
-		const movie = moviesById[movieId];
-		const newValue = !_.get(movie, 'isSelected');
-		dispatch({ type: types.MOVIE_SELECTION_TOGGLE, movieId, newValue});
-	}
+export function setSelected(movieId, selected) {
+	return { type: types.MOVIE_SET_SELECTED, movieId, selected};
 }
