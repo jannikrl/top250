@@ -16,9 +16,14 @@ export function fetchMovies() {
 			}
 
 			// Update list using API
+			
+			/*
+			@TODO: Catch errors and update redux state	
+
 			const movies = await ImdbService.getMoviesFromApi();			
 			const moviesById = _.keyBy(movies, movie => movie.id);
 			dispatch({ type: types.MOVIES_FETCHED, moviesById });
+			*/
 		} catch (error) {
 			console.error(error);
 		}
@@ -26,5 +31,5 @@ export function fetchMovies() {
 }
 
 export function setSelected(movieId, selected) {
-	return { type: types.MOVIE_SET_SELECTED, movieId, selected};
+	return { type: types.MOVIE_SET_SELECTED, movieId, selected };
 }

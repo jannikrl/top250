@@ -2,9 +2,13 @@ import Color from 'color';
 
 export const
     // Color
-    primaryColor = Color('#2C89F9'),
+    primaryColor = Color('#E9BA16'),
     textColor = Color('#ffffff'),
-    backgroundColor = Color('#252525'),
+    backgroundColor = Color('#3D3D3D'),
+
+    // Text
+    fontSize = 16,
+    fontFamily = "MuseoSansRounded-500",
 
     // Form
     basePadding = 8,
@@ -13,6 +17,6 @@ export const
 
     // Shadow
     shadowColor = Color('#000000'),
-    shadowOffset = {width: 0, height: 2},
-    shadowRadius = 4,
+    shadowOffset = {width: 0, height: 4},
+    shadowRadius = 16,
     shadowOpacity = 0.5;

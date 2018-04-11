@@ -34,8 +34,13 @@ export default class SwipeableList extends Component {
                 setScrollEnabled={this._setScrollEnabled}
                 isSelected={this._isSelected(item.id)}
                 setSelected={this._setSelected}
+                onPressItem={this._onPressItem}
             />
         )
+    }
+
+    _onPressItem = (movieId) => {
+        this.props.onPressItem(movieId);
     }
 
     _renderSeperator() {
@@ -52,6 +57,7 @@ export default class SwipeableList extends Component {
                 ItemSeparatorComponent={this._renderSeperator}
                 scrollEnabled={this.state.scrollEnabled}
                 keyExtractor={(item) => item.id}
+                style={this.props.style}
             />
         )
     }
@@ -59,8 +65,9 @@ export default class SwipeableList extends Component {
 
 const styles = StyleSheet.create({
     seperator: {
-        flex: 1,
         height: 1,
-        backgroundColor: '#999',
+        backgroundColor: '#606060',
+        width: '74%',
+        marginLeft: '26%',
     }
 })

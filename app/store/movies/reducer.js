@@ -52,5 +52,6 @@ export function getSelectedMoviesById(state) {
 }
 
 export function getSelectedMoviesCount(state) {
-  return _.values(getSelectedMoviesById(state)).length;
+  const selectedMoviesById = getSelectedMoviesById(state);
+  return _.filter(selectedMoviesById, (isSelected) => isSelected).length;
 }

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { StyleSheet } from 'react-native';
 import * as moviesActions from '../store/movies/actions';
 import * as moviesSelectors from '../store/movies/reducer';
 import MovieList from '../components/MovieList';
 import SwipeableList from '../components/SwipeableList';
-
+	
 class HomeScreen extends Component {
 	static navigationOptions = {
-		title: 'Home'
+		title: 'Top 250'
 	}
 	
 	componentDidMount() {
@@ -32,6 +33,7 @@ class HomeScreen extends Component {
 				data={this.props.movieListOrderedByRank}
 				selectedItems={this.props.selectedMoviesById}
 				setSelected={this._setSelected}
+				onPressItem={this._goToMovie}
 			/>
 			
 		);
@@ -40,8 +42,6 @@ class HomeScreen extends Component {
 
 function mapStateToProps(state) {
 	return {
-		// @TODO: refactor name to movieListOrderedByRank
-
 		movieListOrderedByRank: moviesSelectors.getMovieListOrderedByRank(state), 
 		selectedMoviesById: moviesSelectors.getSelectedMoviesById(state),
 	}

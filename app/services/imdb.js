@@ -6,6 +6,8 @@ import * as moviesJson from '../assets/data/movies.json';
 const API_TOKEN = '2680f6b2-3c45-447a-ba81-75e7d93d5da7';
 const IMDB_API_ENDPOINT = 'http://api.myapifilms.com';
 
+// @TODO: Rename file to class name
+
 class ImdbService {
   getMoviesFromFileSystem() {
     const movies = _.get(moviesJson, 'data.movies');
