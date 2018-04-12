@@ -22,6 +22,10 @@ export default class SwipeableList extends Component {
         this.props.setSelected(itemId, selected)
     }
 
+    _onPressItem = (movieId) => {
+        this.props.onPressItem(movieId);
+    }
+
     _isSelected = (itemId) => {
         return !!this.props.selectedItems[itemId];
     }
@@ -30,22 +34,13 @@ export default class SwipeableList extends Component {
         return (
             <SwipeableListItem 
                 id={item.id}
-                movie={item}
+                item={item}
                 setScrollEnabled={this._setScrollEnabled}
                 isSelected={this._isSelected(item.id)}
                 setSelected={this._setSelected}
-                onPressItem={this._onPressItem}
+                renderLayerBehind={this.props.renderLayerBehindListItem}
+                renderListItem={this.props.renderListItem}
             />
-        )
-    }
-
-    _onPressItem = (movieId) => {
-        this.props.onPressItem(movieId);
-    }
-
-    _renderSeperator() {
-        return (
-            <View style={styles.seperator} />
         )
     }
     
@@ -54,7 +49,7 @@ export default class SwipeableList extends Component {
             <FlatList 
                 data={this.props.data}
                 renderItem={this._renderItem}
-                ItemSeparatorComponent={this._renderSeperator}
+                ItemSeparatorComponent={this.props.renderSeperator}
                 scrollEnabled={this.state.scrollEnabled}
                 keyExtractor={(item) => item.id}
                 style={this.props.style}
@@ -62,12 +57,3 @@ export default class SwipeableList extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    seperator: {
-        height: 1,
-        backgroundColor: '#606060',
-        width: '74%',
-        marginLeft: '26%',
-    }
-})

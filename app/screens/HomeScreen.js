@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import * as moviesActions from '../store/movies/actions';
 import * as moviesSelectors from '../store/movies/reducer';
-import MovieList from '../components/MovieList';
-import SwipeableList from '../components/SwipeableList';
-	
+import MovieList from '../components/home-screen/MovieList';
+
+
 class HomeScreen extends Component {
 	static navigationOptions = {
 		title: 'Top 250'
@@ -29,13 +29,12 @@ class HomeScreen extends Component {
 
 	render() {
 		return (
-			<SwipeableList
-				data={this.props.movieListOrderedByRank}
-				selectedItems={this.props.selectedMoviesById}
+			<MovieList 
+				movieList={this.props.movieListOrderedByRank}
+				selectedMoviesById={this.props.selectedMoviesById}
 				setSelected={this._setSelected}
 				onPressItem={this._goToMovie}
 			/>
-			
 		);
 	}
 }
