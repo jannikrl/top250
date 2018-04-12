@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import * as moviesActions from '../store/movies/actions';
 import * as moviesSelectors from '../store/movies/reducer';
-import MovieList from '../components/home-screen/MovieList';
+import Main from '../components/home-screen/Main';
 
 
 class HomeScreen extends Component {
@@ -29,7 +29,7 @@ class HomeScreen extends Component {
 
 	render() {
 		return (
-			<MovieList 
+			<Main 
 				movieList={this.props.movieListOrderedByRank}
 				selectedMoviesById={this.props.selectedMoviesById}
 				setSelected={this._setSelected}

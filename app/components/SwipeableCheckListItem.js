@@ -1,37 +1,17 @@
 import React, { PureComponent } from 'react';
-import { 
-    View, 
-    Text, 
-    Image, 
-    Animated, 
-    PanResponder, 
-    Dimensions, 
-    Vibration,
-    TouchableOpacity,
-    StyleSheet, 
-} from 'react-native';
+import { View, Animated, PanResponder, Dimensions, Vibration, StyleSheet} from 'react-native';
 import * as variables from '../assets/styles/varibales';
-import MyText from './MyText';
-import SvgUri from 'react-native-svg-uri';
-import Color from 'color';
-import MovieListItem from './home-screen/MovieListItem';
-import Check from './home-screen/Check';
+import PropTypes from 'prop-types';
 
 const windowWidth = Dimensions.get('window').width;
 
-export default class SwipeableListItem extends PureComponent {
+export default class SwipeableCheckListItem extends PureComponent {
     constructor(props) {
         super(props)
 
-        this._ignoreSwipeThreshold = 20;
-        this._slowSwipeThreshold = 60;
-        this._selectThreshold = 60;
-        this._slowDownFactor = 0.6;
-        this._isListScrollEnabled = true;
-        this._backgroundColor = Color('#222222');
-
         this.state = {
             position: new Animated.ValueXY(),
+            isSwiping: false,
         };
 
         this._panResponder = PanResponder.create({
@@ -39,24 +19,23 @@ export default class SwipeableListItem extends PureComponent {
             onMoveShouldSetPanResponder: (event, gestureState) => true,
             onPanResponderTerminationRequest: (event,gestureState) => false,
             onPanResponderMove: (event, gestureState) => {
-                if (gestureState.dx < this._ignoreSwipeThreshold) {
+                if (gestureState.dx < this.props.ignoreSwipeThreshold) {
                     return;
                 }
 
-                this._setListScrollEnabled(false);
+                this._onSwipeStart();
                 
                 this.state.position.setValue({
-                    x: gestureState.dx - this._ignoreSwipeThreshold, 
+                    x: gestureState.dx - this.props.ignoreSwipeThreshold, 
                     y: 0
                 });
             },
             onPanResponderRelease: (event, gestureState) => {
-                if (gestureState.dx > this._selectThreshold) {
-                    this._setSelected(!this.props.isSelected);
-                    Vibration.vibrate();
+                if (gestureState.dx > this.props.selectThreshold) {
+                    this._onSwipeSuccess();
                 }
 
-                this._setListScrollEnabled(true);
+                this._onSwipeEnd();
 
                 Animated.sequence([
                     Animated.decay(this.state.position, {
@@ -72,31 +51,37 @@ export default class SwipeableListItem extends PureComponent {
         });
     }
 
-    _setSelected(selected) {
-        this.props.setSelected(this.props.id, selected)
-    }
-
-    _setListScrollEnabled(enabled) {
-        if (this._isListScrollEnabled === enabled) {
+    _onSwipeStart() {
+        if (this.isSwiping) {
             return;
         }
 
-        this.props.setScrollEnabled(enabled);
-        this._isListScrollEnabled = enabled;
+        this.props.onSwipeStart();
+        this.setState({isSwiping: true});
     }
     
+    _onSwipeEnd() {
+        this.props.onSwipeEnd();
+        this.setState({isSwiping: false});
+    }
+
+    _onSwipeSuccess() {
+        Vibration.vibrate();
+        this.props.onSwipeSuccess(this.props.id);
+    }
+
     render() {        
         const listItemTranslateX = this.state.position.x.interpolate({
-            inputRange: [0, this._slowSwipeThreshold, windowWidth],
-            outputRange: [0, this._slowSwipeThreshold,  windowWidth * this._slowDownFactor],
+            inputRange: [0, this.props.slowSwipeThreshold, windowWidth],
+            outputRange: [0, this.props.slowSwipeThreshold,  windowWidth * this.props.slowDownFactor],
         });
         const checkTranslateX = this.state.position.x.interpolate({
-            inputRange: [0, this._selectThreshold, windowWidth],
-            outputRange: [0, 0,  windowWidth * this._slowDownFactor - this._slowSwipeThreshold],
+            inputRange: [0, this.props.selectThreshold, windowWidth],
+            outputRange: [0, 0,  windowWidth * this.props.slowDownFactor - this.props.slowSwipeThreshold],
         });
 
         return (
-            <View style={[styles.swipeableListItem, {backgroundColor: this._backgroundColor}]}>
+            <View style={[styles.swipeableCheckListItem, {backgroundColor: this.props.backgroundColor}]}>
                 <Animated.View style={[{transform: [{translateX: checkTranslateX}]}, styles.checkContainer]}>
                     {this.props.renderLayerBehind()}
                 </Animated.View>
@@ -113,8 +98,44 @@ export default class SwipeableListItem extends PureComponent {
     }
 }
 
+SwipeableCheckListItem.defaultProps = {
+    // Animation
+    ignoreSwipeThreshold: 20,
+    slowSwipeThreshold: 60,
+    selectThreshold: 60,
+    slowDownFactor: 0.6,
+
+    // Styling
+    backgroundColor: '#222222',
+}
+
+SwipeableCheckListItem.propTypes = {
+    // Animation
+    ignoreSwipeThreshold: PropTypes.number,
+    slowSwipeThreshold: PropTypes.number,
+    selectThreshold: PropTypes.number,
+    slowDownFactor: PropTypes.number,
+    
+    // Styling
+    backgroundColor: PropTypes.string,
+    
+    // Data
+    id: PropTypes.string.isRequired,
+    item: PropTypes.object.isRequired,
+    isSelected: PropTypes.bool,
+    
+    // Events
+    onSwipeStart: PropTypes.func,
+    onSwipeEnd: PropTypes.func,
+    onSwipeSuccess: PropTypes.func,
+
+    // Render
+    renderLayerBehind: PropTypes.func,
+    renderListItem: PropTypes.func,
+}
+
 const styles = StyleSheet.create({
-    swipeableListItem: {
+    swipeableCheckListItem: {
         position: 'relative',
     },
     checkContainer: {

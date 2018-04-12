@@ -1,8 +1,8 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import MovieScreen from '../screens/MovieScreen';
+import HomeScreen from '../containers/HomeScreen';
+import ProfileScreen from '../containers/ProfileScreen';
+import MovieScreen from '../containers/MovieScreen';
 import * as options from './navigationOptions'
 
 const ProfileNavigator = StackNavigator({

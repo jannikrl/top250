@@ -14,7 +14,7 @@ import MyText from '../MyText';
 import SvgUri from 'react-native-svg-uri';
 import Color from 'color';
 
-export default class MovieListItem extends PureComponent {
+export default class ListItem extends PureComponent {
     _onPress = () => {
         this.props.onPressItem(this.props.movie.id);
     }
