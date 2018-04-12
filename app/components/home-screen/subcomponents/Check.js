@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
-import * as variables from '../../assets/styles/varibales';
+import * as variables from 'app/assets/styles/varibales';
 
 export default class Check extends PureComponent {
     render() {
         return (
-            <SvgUri style={StyleSheet.flatten(styles.check)} source={require('../../assets/images/check.svg')}></SvgUri>
+            <SvgUri style={StyleSheet.flatten(styles.check)} source={require('app/assets/images/check.svg')}></SvgUri>
         )
     }
 }

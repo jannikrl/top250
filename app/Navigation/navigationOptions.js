@@ -33,7 +33,7 @@ export const profileNavigatorOptions = {
 }
 
 export const mainNavigatorOptions = {
-	initialRouteName: 'Home',
+	initialRouteName: 'Profile',
 	navigationOptions: ({ navigation }) => ({
 		tabBarIcon: ({ focused, tintColor }) => {
 			const { routeName } = navigation.state;

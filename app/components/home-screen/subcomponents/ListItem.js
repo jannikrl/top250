@@ -9,8 +9,8 @@ import {
     TouchableOpacity,
     StyleSheet, 
 } from 'react-native';
-import * as variables from '../../assets/styles/varibales';
-import MyText from '../MyText';
+import * as variables from 'app/assets/styles/varibales';
+import MyText from 'app/components/MyText';
 import SvgUri from 'react-native-svg-uri';
 import Color from 'color';
 
@@ -33,7 +33,7 @@ export default class ListItem extends PureComponent {
                     <MyText style={styles.year}>{ this.props.movie.year }</MyText>
                 </View>
                 <View style={styles.secondaryInfo}>
-                    <SvgUri style={StyleSheet.flatten(styles.star)} source={require('../../assets/images/star.svg')}></SvgUri>
+                    <SvgUri style={StyleSheet.flatten(styles.star)} source={require('app/assets/images/star.svg')}></SvgUri>
                     <MyText style={styles.rating}>{ this.props.movie.rating }</MyText>
                 </View>
             </TouchableOpacity>

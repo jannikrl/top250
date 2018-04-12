@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Text, FlatList } from 'react-native';
-import Check from './Check';
-import Seperator from './Seperator';
-import ListItem from './ListItem';
+import Check from './subcomponents/Check';
+import Seperator from './subcomponents/Seperator';
+import ListItem from './subcomponents/ListItem';
 import SwipeableCheckListItem from '../SwipeableCheckListItem';
 
 export default class MovieList extends PureComponent {
