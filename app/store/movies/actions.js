@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import * as types from './actionTypes';
 import * as moviesSelectors from './reducer';
-import ImdbService from '../../services/imdb';
+import ImdbService from '../../services/ImdbService';
 
 export function fetchMovies() {
 	return async (dispatch, getState) => {
@@ -31,5 +31,5 @@ export function fetchMovies() {
 }
 
 export function setSelected(movieId, selected) {
-	return { type: types.MOVIE_SET_SELECTED, movieId, selected };
+    return { type: types.MOVIE_SET_SELECTED, movieId, selected };
 }
