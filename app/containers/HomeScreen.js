@@ -1,16 +1,20 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 import * as moviesActions from '../store/movies/actions';
 import * as moviesSelectors from '../store/movies/reducer';
 import * as onboardingActions from '../store/onboarding/actions';
 import * as onboardingSelectors from '../store/onboarding/reducer';
 import Main from '../components/home-screen/Main';
+import HeaderRight from '../components/home-screen/HeaderRight';
 
 
 class HomeScreen extends PureComponent {
-	static navigationOptions = {
-		title: 'Top 250'
+	static navigationOptions = ({ navigation }) => {
+        return {
+            title: 'Top 250',
+            headerRight: <HeaderRight goToFilter={() => navigation.navigate('Filter')} />,
+        }
 	}
 	
 	componentDidMount() {
@@ -19,7 +23,7 @@ class HomeScreen extends PureComponent {
 
 	_goToMovie = (movieId) => {
 		this.props.navigation.navigate('Movie', {movieId: movieId});
-	}
+    }
 
 	_setSelected = (movieId, selected) => {
 		this.props.dispatch(moviesActions.setSelected(movieId, selected));
@@ -32,7 +36,7 @@ class HomeScreen extends PureComponent {
 	render() {
 		return (
 			<Main 
-				movieList={this.props.movieListOrderedByRank}
+				movieList={this.props.movieList}
 				selectedMoviesById={this.props.selectedMoviesById}
 				setSelected={this._setSelected}
                 onPressMovie={this._goToMovie}
@@ -44,10 +48,8 @@ class HomeScreen extends PureComponent {
 }
 
 function mapStateToProps(state) {
-    console.log(state);
-
 	return {
-		movieListOrderedByRank: moviesSelectors.getMovieListOrderedByRank(state), 
+		movieList: moviesSelectors.getMovieList(state), 
         selectedMoviesById: moviesSelectors.getSelectedMoviesById(state),
         hasOnboarded: onboardingSelectors.hasOnboarded(state),
 	}

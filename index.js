@@ -5,4 +5,4 @@ AppRegistry.registerComponent('top250', () => App);
 
 // React Navigation still uses componentWillMount,
 // which is deprecated and shows warnings on screen. 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;

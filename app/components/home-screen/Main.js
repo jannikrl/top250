@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import { View, LayoutAnimation, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Tooltip from '../Tooltip';
 import MovieList from './subcomponents/MovieList';
-import Button from '../Button';
+import OutlineButton from '../OutlineButton';
 import MyText from '../MyText';
 import Color from 'color';
 
@@ -23,7 +23,7 @@ export default class Main extends PureComponent {
                     and which do you still need to see? Swipe right 
                     to check off a movie.
                 </MyText>
-                <Button color="dark" rounded={true} style={styles.button} onPress={this._updateHasOnboarded}>Got it!</Button>
+                <OutlineButton color="dark" rounded={true} style={styles.button} onPress={this._updateHasOnboarded}>Got it!</OutlineButton>
             </Tooltip>
         )
     }

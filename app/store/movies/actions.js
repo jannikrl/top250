@@ -33,3 +33,7 @@ export function fetchMovies() {
 export function setSelected(movieId, selected) {
     return { type: types.MOVIE_SET_SELECTED, movieId, selected };
 }
+
+export function setCurrentFilter(filter) {
+    return { type: types.MOVIE_SET_FILTER, filter };
+}

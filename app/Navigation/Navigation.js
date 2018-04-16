@@ -3,36 +3,45 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import HomeScreen from '../containers/HomeScreen';
 import ProfileScreen from '../containers/ProfileScreen';
 import MovieScreen from '../containers/MovieScreen';
+import FilterModal from '../containers/FilterModal';
 import * as options from './navigationOptions'
 
 const ProfileNavigator = StackNavigator({
 	Profile: ProfileScreen,
-},
-	options.profileNavigatorOptions
-)
+}, {
+    ...options.profileNavigatorOptions
+})
 
 const MovieNavigator = StackNavigator({
 	Movies: HomeScreen,
-	Movie: MovieScreen,
-},
-	options.movieNavigatorOptions
-)
+    Movie: MovieScreen,
+}, {
+    ...options.movieNavigatorOptions
+})
 
 const MainNavigator = TabNavigator({
 	Home: {
 		screen: MovieNavigator,
-		navigationOptions: ({ navigation }) => ({
+		navigationOptions: () => ({
 			title: 'Top 250'
 		}),
 	},
 	Profile: {
 		screen: ProfileNavigator,
-		navigationOptions: ({ navigation }) => ({
+		navigationOptions: () => ({
 			title: 'My stats'
 		}),
 	}
-}, 
-	options.mainNavigatorOptions
-)
+}, {
+    ...options.mainNavigatorOptions
+})
 
-export default MainNavigator;
+const RootNavigator = StackNavigator({
+    Main: MainNavigator,
+    Filter: FilterModal,
+}, {
+    mode: 'modal',
+    headerMode: 'none',
+})
+
+export default RootNavigator;
