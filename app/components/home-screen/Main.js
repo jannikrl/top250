@@ -5,6 +5,7 @@ import MovieList from './subcomponents/MovieList';
 import OutlineButton from '../OutlineButton';
 import MyText from '../MyText';
 import Color from 'color';
+import Alert from '../Alert';
 
 export default class Main extends PureComponent {
     _updateHasOnboarded = () => {
@@ -27,16 +28,32 @@ export default class Main extends PureComponent {
             </Tooltip>
         )
     }
+
+    _renderAlert = () => {
+        if (this.props.movieList.length !== 0) {
+            return;
+        }
+        
+        return (
+            <Alert>
+                No movies match your chosen filter. Choose another filter.
+            </Alert>
+        )
+    }
     
     render() {
         return (
-            <View>
+            <View style={styles.main}>
+                { this._renderAlert() }
+                
                 <MovieList
                     movieList={this.props.movieList}
                     selectedMoviesById={this.props.selectedMoviesById}
                     setSelected={this.props.setSelected}
-                    onPressItem={this.props.onPressMovie}                  
+                    onPressItem={this.props.onPressMovie}
+                    hasOnboarded={this.props.hasOnboarded}                  
                 />
+
                 { this._renderTooltip() }
             </View>
         )
@@ -44,6 +61,9 @@ export default class Main extends PureComponent {
 }
 
 const styles = StyleSheet.create({
+    main: {
+        flex: 1,
+    },
     tooltip: {
         position: 'absolute',
         top: 125,

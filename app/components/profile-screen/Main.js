@@ -22,7 +22,7 @@ export default class Main extends PureComponent {
 						progress={progress}
 						progressColor={chartStyles.chartCircleProgress}
 						backgroundColor={chartStyles.chartCircleBackground}
-						strokeWidth={chartStyles.strokeWidth}
+                        strokeWidth={chartStyles.strokeWidth}
 					/>
 				</View>
 			</View>

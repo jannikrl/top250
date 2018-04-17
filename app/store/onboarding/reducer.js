@@ -6,8 +6,6 @@ const initialState = Immutable({
 });
 
 export default function reduce(state = initialState, action = {}) {
-    console.log(state);
-    
     switch (action.type) {
         case types.UPDATE_HAS_ONBOARDED:
             return {

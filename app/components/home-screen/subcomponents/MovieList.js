@@ -13,7 +13,7 @@ export default class MovieList extends PureComponent {
         this.state = {
             scrollEnabled: true,
         }
-	}
+    }
 	
 	_enableScroll = () => {
         this.setState({
@@ -25,7 +25,15 @@ export default class MovieList extends PureComponent {
         this.setState({
             scrollEnabled: false
         });
-	}
+    }
+    
+    _isScrollEnabled = () => {
+        if (!this.props.hasOnboarded) {
+            return false;
+        }
+
+        return this.state.scrollEnabled
+    }
 	
 	_isSelected = (itemId) => {
         return !!this.props.selectedMoviesById[itemId];
@@ -75,15 +83,20 @@ export default class MovieList extends PureComponent {
 
 	render() {
         return (
-            <View>
-                <FlatList 
-                    data={this.props.movieList}
-                    scrollEnabled={this.state.scrollEnabled}
-                    keyExtractor={(item) => item.id}
-                    renderItem={this._renderItem}
-                    ItemSeparatorComponent={this._renderSeperator}
-                />
-            </View>
+            <FlatList 
+                data={this.props.movieList}
+                scrollEnabled={this._isScrollEnabled()}
+                keyExtractor={(item) => item.id}
+                renderItem={this._renderItem}
+                ItemSeparatorComponent={this._renderSeperator}
+                style={styles.movieList}
+            />
         )
     }
 }
+
+const styles = StyleSheet.create({
+    movieList: {
+        flex: 1
+    }    
+});

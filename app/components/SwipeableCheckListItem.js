@@ -52,7 +52,7 @@ export default class SwipeableCheckListItem extends PureComponent {
     }
 
     _onSwipeStart() {
-        if (this.isSwiping) {
+        if (this.state.isSwiping) {
             return;
         }
 
