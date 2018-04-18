@@ -28,9 +28,9 @@ export default class Main extends PureComponent {
     
     render () {
         const options = [
-            {title: 'All movies', value: 'ALL_MOVIES'}, 
-            {title: 'Wached movies', value: 'SELECTED_MOVIES'}, 
-            {title: 'Unwached movies', value: 'NOT_SELECTED_MOVIES'}, 
+            {title: 'All movies', id: 'ALL_MOVIES'}, 
+            {title: 'Wached movies', id: 'SELECTED_MOVIES'}, 
+            {title: 'Unwached movies', id: 'NOT_SELECTED_MOVIES'}, 
         ]
 
         return (

@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import MyText from './MyText';
 import * as variables from '../assets/styles/varibales';
+import PropTypes from 'prop-types';
 
 export default class RadioSelectButton extends PureComponent {
     _onPress = () => {
-        this.props.onPress(this.props.value);
+        this.props.onPress(this.props.id);
     }
     
     render () {
@@ -22,6 +23,12 @@ export default class RadioSelectButton extends PureComponent {
             </TouchableOpacity>
         )
     }
+}
+
+RadioSelectButton.propTypes = {
+    id: PropTypes.any.isRequired,
+    title: PropTypes.string.isRequired,
+    isSelected: PropTypes.bool,
 }
 
 const styles = StyleSheet.create({
