@@ -57,7 +57,7 @@ export default class MovieList extends PureComponent {
 
 	_renderMovieListItem = ({item, isSelected}) => {		
 		return (
-			<MovieListItem movie={item} isSelected={isSelected} onPressItem={this.props.onPressItem} />
+			<MovieListItem movie={item} isSelected={isSelected} />
 		)
 	};
 

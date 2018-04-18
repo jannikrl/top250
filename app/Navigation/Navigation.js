@@ -2,7 +2,6 @@ import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import HomeScreen from '../containers/HomeScreen';
 import ProfileScreen from '../containers/ProfileScreen';
-import MovieScreen from '../containers/MovieScreen';
 import FilterScreen from '../containers/FilterScreen';
 import * as options from './navigationOptions'
 
@@ -14,7 +13,6 @@ const ProfileNavigator = StackNavigator({
 
 const MovieNavigator = StackNavigator({
 	Movies: HomeScreen,
-    Movie: MovieScreen,
 }, {
     ...options.movieNavigatorOptions
 })

@@ -6,7 +6,6 @@ import {
     Animated, 
     PanResponder, 
     Dimensions, 
-    TouchableOpacity,
     StyleSheet, 
 } from 'react-native';
 import * as variables from 'app/assets/styles/varibales';
@@ -15,15 +14,11 @@ import SvgUri from 'react-native-svg-uri';
 import Color from 'color';
 
 export default class MovieListItem extends PureComponent {
-    _onPress = () => {
-        this.props.onPressItem(this.props.movie.id);
-    }
-
     render() {
         const backgroundColor = (this.props.isSelected) ? variables.primaryColor.alpha(0.5) : variables.backgroundColor;        
 
         return (
-            <TouchableOpacity activeOpacity={0.8} style={[styles.contentInside, {backgroundColor}]} onPress={this._onPress}>   
+            <View style={[styles.contentInside, {backgroundColor}]}>   
                 <Image source={{uri:this.props.movie.thumbnail}} style={styles.thumbnail} />
                 <View style={styles.mainInfo}>
                     <MyText ellipsizeMode="tail" numberOfLines={2}>
@@ -36,7 +31,7 @@ export default class MovieListItem extends PureComponent {
                     <SvgUri style={StyleSheet.flatten(styles.star)} source={require('app/assets/images/star.svg')}></SvgUri>
                     <MyText style={styles.rating}>{ this.props.movie.rating }</MyText>
                 </View>
-            </TouchableOpacity>
+            </View>
         )
     }
 }

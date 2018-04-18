@@ -59,7 +59,6 @@ export default class Main extends PureComponent {
                     movieList={this.props.movieList}
                     selectedMoviesById={this.props.selectedMoviesById}
                     setSelected={this.props.setSelected}
-                    onPressItem={this.props.onPressMovie}
                     hasOnboarded={this.props.hasOnboarded}                  
                 />
 

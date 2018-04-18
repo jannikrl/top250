@@ -27,10 +27,6 @@ class HomeScreen extends PureComponent {
 		this.props.dispatch(moviesActions.fetchMoviesFromApi());
 	}
 
-	_goToMovie = (movieId) => {
-		this.props.navigation.navigate('Movie', {movieId: movieId});
-    }
-
 	_setSelected = (movieId, selected) => {
 		this.props.dispatch(moviesActions.setSelected(movieId, selected));
     }
@@ -45,7 +41,6 @@ class HomeScreen extends PureComponent {
 				movieList={this.props.movieList}
 				selectedMoviesById={this.props.selectedMoviesById}
 				setSelected={this._setSelected}
-                onPressMovie={this._goToMovie}
                 updateHasOnboarded={this._updateHasOnboarded}
                 hasOnboarded={this.props.hasOnboarded}
 			/>
