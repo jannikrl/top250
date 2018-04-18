@@ -4,7 +4,7 @@ import * as variables from '../../assets/styles/varibales';
 import MyText from '../MyText';
 import RadioSelect from '../RadioSelect';
 import SvgUri from 'react-native-svg-uri';
-import Button from '../Button';
+import MyButton from '../MyButton';
 
 export default class Main extends PureComponent {    
     constructor(props) {
@@ -47,7 +47,7 @@ export default class Main extends PureComponent {
                     onChange={this._onFilterChange}
                 />
 
-                <Button style={styles.button} title="Filter" onPress={this._onSubmit} />
+                <MyButton style={styles.button} onPress={this._onSubmit}>Filter</MyButton>
             </View>
         )
     }
@@ -77,5 +77,6 @@ const styles = StyleSheet.create({
     button: {
         position: 'absolute',
         bottom: variables.basePadding * 2,
+        width: '100%',
     }
 })

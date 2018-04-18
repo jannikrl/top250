@@ -3,7 +3,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import HomeScreen from '../containers/HomeScreen';
 import ProfileScreen from '../containers/ProfileScreen';
 import MovieScreen from '../containers/MovieScreen';
-import FilterModal from '../containers/FilterModal';
+import FilterScreen from '../containers/FilterScreen';
 import * as options from './navigationOptions'
 
 const ProfileNavigator = StackNavigator({
@@ -38,7 +38,7 @@ const MainNavigator = TabNavigator({
 
 const RootNavigator = StackNavigator({
     Main: MainNavigator,
-    Filter: FilterModal,
+    Filter: FilterScreen,
 }, {
     mode: 'modal',
     headerMode: 'none',

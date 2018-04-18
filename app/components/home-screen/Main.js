@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Tooltip from '../Tooltip';
 import MovieList from './subcomponents/MovieList';
-import OutlineButton from '../OutlineButton';
+import MyButton from '../MyButton';
 import MyText from '../MyText';
 import Color from 'color';
 import Alert from '../Alert';
@@ -10,6 +10,18 @@ import Alert from '../Alert';
 export default class Main extends PureComponent {
     _updateHasOnboarded = () => {
         this.props.updateHasOnboarded(true);
+    }
+
+    _renderAlert = () => {
+        if (this.props.movieList.length !== 0) {
+            return;
+        }
+        
+        return (
+            <Alert>
+                No movies match your chosen filter. Choose another filter.
+            </Alert>
+        )
     }
     
     _renderTooltip = () => {
@@ -24,20 +36,17 @@ export default class Main extends PureComponent {
                     and which do you still need to see? Swipe right 
                     to check off a movie.
                 </MyText>
-                <OutlineButton color="dark" rounded={true} style={styles.button} onPress={this._updateHasOnboarded}>Got it!</OutlineButton>
+                <MyButton 
+                    color="dark" 
+                    size="small" 
+                    outline={true} 
+                    rounded={true} 
+                    style={styles.button} 
+                    onPress={this._updateHasOnboarded}
+                >
+                    Got it!
+                </MyButton>
             </Tooltip>
-        )
-    }
-
-    _renderAlert = () => {
-        if (this.props.movieList.length !== 0) {
-            return;
-        }
-        
-        return (
-            <Alert>
-                No movies match your chosen filter. Choose another filter.
-            </Alert>
         )
     }
     
