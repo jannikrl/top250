@@ -1,3 +1,6 @@
-export const MOVIES_FETCHED = 'movies.MOVIES_FETCHED';
+export const MOVIES_LOAD_SUCCESS = 'movies.MOVIES_LOAD_SUCCESS';
+export const MOVIES_FETCH_REQUEST = 'movies.MOVIES_FETCH_REQUEST';
+export const MOVIES_FETCH_SUCCESS = 'movies.MOVIES_FETCH_SUCCESS';
+export const MOVIES_FETCH_FAILURE = 'movies.MOVIES_FETCH_FAILURE';
 export const MOVIE_SET_SELECTED = 'movies.MOVIE_SET_SELECTED';
 export const MOVIE_SET_FILTER = 'movies.MOVIE_SET_FILTER';

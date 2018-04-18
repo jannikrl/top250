@@ -3,29 +3,24 @@ import * as types from './actionTypes';
 import * as moviesSelectors from './reducer';
 import ImdbService from '../../services/ImdbService';
 
-export function fetchMovies() {
+export function loadMoviesFromFile() {
+    return (dispatch, getState) => {
+        const movies = ImdbService.getMoviesFromFileSystem();			
+        const moviesById = _.keyBy(movies, movie => movie.id);
+        dispatch({ type: types.MOVIES_LOAD_SUCCESS, moviesById });
+    }
+}
+
+export function fetchMoviesFromApi() {
 	return async (dispatch, getState) => {
-		try {
-			const moviesCount = moviesSelectors.getMoviesCount(getState());
-				
-			// Load movies from file system for quick response
-			if (!moviesCount) {
-				const movies = await ImdbService.getMoviesFromFileSystem();			
-				const moviesById = _.keyBy(movies, movie => movie.id);
-				dispatch({ type: types.MOVIES_FETCHED, moviesById });
-			}
+        dispatch({ type: types.MOVIES_FETCH_REQUEST });
 
-			// Update list using API
-			
-			/*
-			@TODO: Catch errors and update redux state	
-
+        try {
 			const movies = await ImdbService.getMoviesFromApi();			
 			const moviesById = _.keyBy(movies, movie => movie.id);
-			dispatch({ type: types.MOVIES_FETCHED, moviesById });
-			*/
+            dispatch({ type: types.MOVIES_FETCH_SUCCESS, moviesById });
 		} catch (error) {
-			console.error(error);
+			dispatch({ type: types.MOVIES_FETCH_FAILURE });
 		}
 	};
 }

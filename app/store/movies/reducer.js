@@ -6,14 +6,33 @@ const initialState = Immutable({
   moviesById: undefined,
   selectedMoviesById: {},
   currentFilter: 'ALL_MOVIES',
+  isFetching: false,
+  hasErrored: false,
 });
 
 export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
-    case types.MOVIES_FETCHED:
+    case types.MOVIES_LOAD_SUCCESS:
         return {
             ...state, 
             moviesById: action.moviesById
+        };
+    case types.MOVIES_FETCH_REQUEST:
+        return {
+            ...state, 
+            isFetching: true
+        };
+    case types.MOVIES_FETCH_SUCCESS:
+        return {
+            ...state, 
+            moviesById: action.moviesById,
+            isFetching: false,
+        };
+    case types.MOVIES_FETCH_FAILURE:
+        return {
+            ...state,
+            isFetching: false,
+            hasErrored: true,
         };
     case types.MOVIE_SET_SELECTED:
         return {

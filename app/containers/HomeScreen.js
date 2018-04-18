@@ -18,7 +18,13 @@ class HomeScreen extends PureComponent {
 	}
 	
 	componentDidMount() {
-		this.props.dispatch(moviesActions.fetchMovies());
+        // Load movies from file for quick response
+        if (!this.props.movieList.length) {
+            this.props.dispatch(moviesActions.loadMoviesFromFile());
+        }
+
+        // Update movie list from API
+		this.props.dispatch(moviesActions.fetchMoviesFromApi());
 	}
 
 	_goToMovie = (movieId) => {
