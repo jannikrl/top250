@@ -6,7 +6,7 @@ export default class HeaderRight extends PureComponent {
     render () {
         return (
             <View style={styles.headerRight}>
-                <Button onPress={() => this.props.goToFilter()} title="Filter" color={variables.primaryColor} />
+                <Button onPress={() => this.props.goToFilterScreen()} title="Filter" color={variables.primaryColor} />
             </View>
         )
     }

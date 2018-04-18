@@ -18,11 +18,9 @@ class ProfileScreen extends React.Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		moviesCount: moviesSelectors.getMoviesCount(state),
-		selectedMoviesCount: moviesSelectors.getSelectedMoviesCount(state),
-	}
-}
+const mapStateToProps = (state) => ({
+    moviesCount: moviesSelectors.getMoviesCount(state),
+    selectedMoviesCount: moviesSelectors.getSelectedMoviesCount(state),
+})
 
 export default connect(mapStateToProps)(ProfileScreen);

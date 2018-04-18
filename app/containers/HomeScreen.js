@@ -13,26 +13,26 @@ class HomeScreen extends PureComponent {
 	static navigationOptions = ({ navigation }) => {
         return {
             title: 'Top 250',
-            headerRight: <HeaderRight goToFilter={() => navigation.navigate('Filter')} />,
+            headerRight: <HeaderRight goToFilterScreen={() => navigation.navigate('Filter')} />,
         }
 	}
 	
 	componentDidMount() {
         // Load movies from file for quick response
         if (!this.props.movieList.length) {
-            this.props.dispatch(moviesActions.loadMoviesFromFile());
+            this.props.loadMoviesFromFile();
         }
 
         // Update movie list from API
-		this.props.dispatch(moviesActions.fetchMoviesFromApi());
+		this.props.fetchMoviesFromApi;
 	}
 
 	_setSelected = (movieId, selected) => {
-		this.props.dispatch(moviesActions.setSelected(movieId, selected));
+		this.props.setSelected(movieId, selected);
     }
     
     _updateHasOnboarded = (hasOnboarded) => {
-        this.props.dispatch(onboardingActions.updateHasOnboarded(hasOnboarded));
+        this.props.updateHasOnboarded(hasOnboarded);
     }
 
 	render() {
@@ -48,12 +48,17 @@ class HomeScreen extends PureComponent {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		movieList: moviesSelectors.getMovieList(state), 
-        selectedMoviesById: moviesSelectors.getSelectedMoviesById(state),
-        hasOnboarded: onboardingSelectors.hasOnboarded(state),
-	}
-}
+const mapStateToProps = (state) => ({
+    movieList: moviesSelectors.getMovieList(state), 
+    selectedMoviesById: moviesSelectors.getSelectedMoviesById(state),
+    hasOnboarded: onboardingSelectors.hasOnboarded(state),
+})
 
-export default connect(mapStateToProps)(HomeScreen)
+const mapDispatchToProps = (dispatch) => ({
+    loadMoviesFromFile: () => dispatch(moviesActions.loadMoviesFromFile()),
+    fetchMoviesFromApi: () => dispatch(moviesActions.fetchMoviesFromApi()),
+    setSelected: (movieId, selected) => dispatch(moviesActions.setSelected(movieId, selected)),
+    updateHasOnboarded: (hasOnboarded) => dispatch(onboardingActions.updateHasOnboarded(hasOnboarded)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

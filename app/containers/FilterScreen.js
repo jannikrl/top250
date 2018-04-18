@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import * as movieSelectors from '../store/movies/reducer';
 import * as movieActions from '../store/movies/actions';
 
-class FilterModal extends PureComponent {
+class FilterScreen extends PureComponent {
     _setCurrentFilter = (filter) => {
-        this.props.dispatch(movieActions.setCurrentFilter(filter));
+        this.props.setCurrentFilter(filter);
     }
     
     _goBack = () => {
@@ -25,10 +25,12 @@ class FilterModal extends PureComponent {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        currentFilter: movieSelectors.getCurrentFilter(state),
-    }
-}
+const mapStateToProps = (state) => ({
+    currentFilter: movieSelectors.getCurrentFilter(state),
+})
 
-export default connect(mapStateToProps)(FilterModal);
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentFilter: (filter) => dispatch(movieActions.setCurrentFilter(filter))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterScreen);
