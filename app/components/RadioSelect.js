@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import variables from '../assets/styles/varibales';
-import RadioButton from './RadioButton';
+import RadioSelectButton from './RadioSelectButton';
 
 export default class RadioSelect extends PureComponent {
     constructor(props) {
@@ -27,7 +27,7 @@ export default class RadioSelect extends PureComponent {
     render () {
         const radioButtons = this.props.options.map(option => {
             return (
-                <RadioButton 
+                <RadioSelectButton 
                     title={option.title} 
                     value={option.value} 
                     isSelected={this._isSelected(option.value)} 

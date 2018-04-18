@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const windowWidth = Dimensions.get('window').width;
 
-export default class SwipeableCheckListItem extends PureComponent {
+export default class SwipeableListItem extends PureComponent {
     constructor(props) {
         super(props)
 
@@ -98,7 +98,7 @@ export default class SwipeableCheckListItem extends PureComponent {
     }
 }
 
-SwipeableCheckListItem.defaultProps = {
+SwipeableListItem.defaultProps = {
     // Animation
     ignoreSwipeThreshold: 20,
     slowSwipeThreshold: 60,
@@ -109,7 +109,7 @@ SwipeableCheckListItem.defaultProps = {
     backgroundColor: '#222222',
 }
 
-SwipeableCheckListItem.propTypes = {
+SwipeableListItem.propTypes = {
     // Animation
     ignoreSwipeThreshold: PropTypes.number,
     slowSwipeThreshold: PropTypes.number,

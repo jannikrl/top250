@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import Check from './Check';
 import Seperator from './Seperator';
 import MovieListItem from './MovieListItem';
-import SwipeableCheckListItem from '../../SwipeableCheckListItem';
+import SwipeableListItem from '../../SwipeableListItem';
 import Tooltip from '../../Tooltip';
 
 export default class MovieList extends PureComponent {
@@ -63,7 +63,7 @@ export default class MovieList extends PureComponent {
 
 	_renderItem = ({ item }) => {
         return (
-            <SwipeableCheckListItem 
+            <SwipeableListItem 
                 // Data
                 id={item.id}
                 item={item}

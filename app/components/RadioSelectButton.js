@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import MyText from './MyText';
 import * as variables from '../assets/styles/varibales';
 
-export default class RadioButton extends PureComponent {
+export default class RadioSelectButton extends PureComponent {
     _onPress = () => {
         this.props.onPress(this.props.value);
     }
