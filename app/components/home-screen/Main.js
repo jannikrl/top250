@@ -6,6 +6,7 @@ import MyButton from '../MyButton';
 import MyText from '../MyText';
 import Color from 'color';
 import Alert from '../Alert';
+import AnimateTooltip from './subcomponents/AnimateTooltip';
 
 export default class Main extends PureComponent {
     _updateHasOnboarded = () => {
@@ -25,28 +26,26 @@ export default class Main extends PureComponent {
     }
     
     _renderTooltip = () => {
-        if (this.props.hasOnboarded) {
-            return;
-        }
-
         return (
-            <Tooltip style={styles.tooltip}>            
-                <MyText style={styles.text}>
-                    Which of IMDb’s top 250 movies have you watched
-                    and which do you still need to see? Swipe right 
-                    to check off a movie.
-                </MyText>
-                <MyButton 
-                    color="dark" 
-                    size="small" 
-                    outline={true} 
-                    rounded={true} 
-                    style={styles.button} 
-                    onPress={this._updateHasOnboarded}
-                >
-                    Got it!
-                </MyButton>
-            </Tooltip>
+            <AnimateTooltip hasOnboarded={this.props.hasOnboarded}>
+                <Tooltip style={styles.tooltip}>            
+                    <MyText style={styles.text}>
+                        Which of IMDb’s top 250 movies have you watched
+                        and which do you still need to see? Swipe right 
+                        to check off a movie.
+                    </MyText>
+                    <MyButton 
+                        color="dark" 
+                        size="small" 
+                        outline={true} 
+                        rounded={true} 
+                        style={styles.button} 
+                        onPress={this._updateHasOnboarded}
+                    >
+                        Got it!
+                    </MyButton>
+                </Tooltip>
+            </AnimateTooltip>
         )
     }
     
