@@ -14,8 +14,8 @@ The app has:
 
 # Preview
 <p>
-    <img src="app/assets/images/github-readme/onboarding.gif" width="222">
-    <img src="app/assets/images/github-readme/swipe.gif" width="222">
-    <img src="app/assets/images/github-readme/filter.gif" width="222">
-    <img src="app/assets/images/github-readme/my-stats.gif" width="222">
+    <img src="app/assets/images/github-readme/onboarding.gif" width="216">
+    <img src="app/assets/images/github-readme/swipe.gif" width="216">
+    <img src="app/assets/images/github-readme/filter.gif" width="216">
+    <img src="app/assets/images/github-readme/my-stats.gif" width="216">
 </p>
