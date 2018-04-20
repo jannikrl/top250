@@ -13,7 +13,9 @@ The app has:
 - A page showing statistics
 
 # Preview
-![Alt text](app/assets/images/github-readme/onboarding.gif?raw=true "Onboarding")
-![Alt text](app/assets/images/github-readme/swipe.gif?raw=true "Swipe")
-![Alt text](app/assets/images/github-readme/filter.gif?raw=true "Filter")
-![Alt text](app/assets/images/github-readme/my-stats.gif?raw=true "My Stats")
+<p>
+    <img src="app/assets/images/github-readme/onboarding.gif" width="222">
+    <img src="app/assets/images/github-readme/swipe.gif" width="222">
+    <img src="app/assets/images/github-readme/filter.gif" width="222">
+    <img src="app/assets/images/github-readme/my-stats.gif" width="222">
+</p>
