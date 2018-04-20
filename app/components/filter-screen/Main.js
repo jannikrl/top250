@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import * as variables from '../../assets/styles/varibales';
 import MyText from '../MyText';
 import RadioSelect from '../RadioSelect';
@@ -34,26 +34,32 @@ export default class Main extends PureComponent {
         ]
 
         return (
-            <View style={styles.main}>
-                <TouchableOpacity style={styles.close} onPress={this.props.goBack}>
-                    <SvgUri width={16} height={16} source={require('../../assets/images/close.svg')} />
-                </TouchableOpacity>
+            <SafeAreaView style={styles.safeAreaView}>
+                <View style={styles.main}>
+                    <TouchableOpacity style={styles.close} onPress={this.props.goBack}>
+                        <SvgUri width={16} height={16} source={require('../../assets/images/close.svg')} />
+                    </TouchableOpacity>
 
-                <MyText style={styles.heading}>Filter movies</MyText>
+                    <MyText style={styles.heading}>Filter movies</MyText>
 
-                <RadioSelect 
-                    options={options} 
-                    selected={this.props.currentFilter} 
-                    onChange={this._onFilterChange}
-                />
+                    <RadioSelect 
+                        options={options} 
+                        selected={this.props.currentFilter} 
+                        onChange={this._onFilterChange}
+                    />
 
-                <MyButton style={styles.button} onPress={this._onSubmit}>Filter</MyButton>
-            </View>
+                    <MyButton style={styles.button} onPress={this._onSubmit}>Filter</MyButton>
+                </View>
+            </SafeAreaView>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    safeAreaView: {
+        flex: 1,
+        backgroundColor: variables.backgroundColor,
+    },
     main: {
         flex: 1,
         justifyContent: 'center',
@@ -68,7 +74,7 @@ const styles = StyleSheet.create({
     },
     close: {
         position: 'absolute',
-        top: variables.baseMargin * 4,
+        top: variables.baseMargin * 2,
         right: variables.baseMargin * 2,
         width: 30,
         height: 30,

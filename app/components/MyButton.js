@@ -21,6 +21,9 @@ export default class MyButton extends PureComponent {
         if (this.props.rounded) {
             buttonStyles.push(styles.rounded);
         }
+        if (this.props.outline) {
+            buttonStyles.push(styles.outline);
+        }
 
         // Color
         const outline = this.props.outline ? 'Outline' : '';
@@ -53,7 +56,6 @@ MyButton.propTypes = {
 const styles = StyleSheet.create({
     button: {
         borderRadius: variables.borderRadius,
-        borderWidth: 2,
         alignItems: 'center',
     },
     text: {
@@ -95,6 +97,9 @@ const styles = StyleSheet.create({
     rounded: {
         borderRadius: 999,
     },
+    outline: {
+        borderWidth: 2,
+    },
 
     // Color
     primaryButton: {
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
         color: Color('#FFFFFF')
     },
     darkOutlineButton: {
-        borderColor: variables.darkButtonColor
+        borderColor: variables.darkButtonColor,
     },
     darkOutlineText: {
         color: variables.darkTextColor
