@@ -1,6 +1,6 @@
 # Learning React Native
 
-Top 250 is a pet-project I recently build to learn React Native including the following technologies:
+Top 250 is a pet-project I recently designed and built to learn React Native including the following technologies:
 - Redux
 - Containers and Presentational Components
 - Animated API and PanResponder
